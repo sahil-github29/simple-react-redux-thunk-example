@@ -26,15 +26,6 @@ With Redux-thunk we can manually dispatch an action at some point in the future
 import jsonPlaceholder from "../config";
 import _ from "lodash";
 
-export const fetchPost = () => async dispatch => {
-  const response = await jsonPlaceholder.get("/posts");
-
-  dispatch({
-    type: "FETCH_POST",
-    payload: response
-  });
-};
-
 // 1. =>  Memoise version solution to repeating API calls
 // Note: The problem with this approach is that if you update the user
 // it not return the updated user!!
@@ -68,6 +59,23 @@ export const fetchUser = id => async dispatch => {
 
   dispatch({
     type: "FETCH_USER",
+    payload: response
+  });
+};
+export const fetchUsers = () => async dispatch => {
+  const response = await jsonPlaceholder.get(`/users`);
+
+  dispatch({
+    type: "FETCH_USERS",
+    payload: response
+  });
+};
+
+export const fetchPost = () => async dispatch => {
+  const response = await jsonPlaceholder.get("/posts");
+
+  dispatch({
+    type: "FETCH_POST",
     payload: response
   });
 };
